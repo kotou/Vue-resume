@@ -1,0 +1,20 @@
+<template>
+    <div id="topbar">
+        <div>
+            logo
+        </div>
+        <div class="actions">
+            <el-button type="primary">保存</el-button>
+            <el-button>预览</el-button>
+        </div>
+    </div>
+</template>
+
+<style lang='scss'>
+    #topbar {
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       padding:16px;
+    }
+</style>
