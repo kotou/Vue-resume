@@ -28,16 +28,31 @@
     display: flex;
     flex-direction: column;
   }
-
+  .icon {
+       width: 1em; height: 1em;
+       vertical-align: -0.15em;
+       fill: currentColor;
+       overflow: hidden;
+    }
   main {
     display: flex;
     flex: 1;
+    background: #ddd;
     .editor {
       width: 40em;
+      margin: 16px 8px 16px 16px;
+      background: #fff;
+      box-shadow: 0 0 5px #5d5d5d;
+      border-radius: 3px;
+      overflow: hidden;
     }
 
     .preview {
       flex: 1;
+      margin: 16px 16px 16px 8px;
+      background: #fff;
+      box-shadow: 0 0 5px #5d5d5d;
+      border-radius: 3px;
     }
   }
 </style>
