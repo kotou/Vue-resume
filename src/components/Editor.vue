@@ -12,7 +12,7 @@
         <ol class="panes">
             <!--<li v-for="i in [0,1,2,3,4,5]" :class="{avctive:currentTap === i}">tab{{i+1}}</li>-->
             <li :class="{avctive:currentTap === 0}">
-                <workExperienceEditor :profile="profile"></workExperienceEditor>
+                <profileEditor :profile="profile"></profileEditor>
             </li>
             <li :class="{avctive:currentTap === 1}">
                 <h2>工作经历</h2>
@@ -48,9 +48,9 @@
 </template>
 
 <script>
-    import workExperienceEditor from './workExperienceEditor.vue'
+    import profileEditor from './profileEditor.vue'
     export default {
-        components: {workExperienceEditor},
+        components: {profileEditor},
         data() {
             return {
                 currentTap: 0,
