@@ -2,31 +2,80 @@
     <div id="editor">
         <nav>
             <ol>
-                <li v-for="i in [0,1,2,3,4,5]" :class="{avctive:currentTap === i}" v-on:click="currentTap = i">
+                <li v-for="i in [0,1,2,3,4,5]" :class="{avctive:currentTap === i}" @click="currentTap = i">
                     <svg class="icon">
-                        <use v-bind:xlink:href="`#icon-${icons[i]}`"></use>
+                        <use :xlink:href="`#icon-${icons[i]}`"></use>
                     </svg>
                 </li>
             </ol>
         </nav>
         <ol class="panes">
-            <li :class="{avctive:currentTap === 0}">tab1</li>
-            <li :class="{avctive:currentTap === 1}">tab2</li>
-            <li :class="{avctive:currentTap === 2}">tab3</li>
-            <li :class="{avctive:currentTap === 3}">tab4</li>
-            <li :class="{avctive:currentTap === 4}">tab5</li>
-            <li :class="{avctive:currentTap === 5}">tab6</li>
+            <!--<li v-for="i in [0,1,2,3,4,5]" :class="{avctive:currentTap === i}">tab{{i+1}}</li>-->
+            <li :class="{avctive:currentTap === 0}">
+                <profileEditor :profile="profile"></profileEditor>
+            </li>
+            <li :class="{avctive:currentTap === 1}">
+                <h2>工作经历</h2>
+                <div class="wrap" v-for="(work,index) in workExperience">
+                    <el-form>
+                        <el-form-item label="公司">
+                            <el-input v-model="work.company"></el-input>
+                        </el-form-item>
+                        <el-form-item label="工作内容">
+                            <el-input v-model="work.content"></el-input>
+                        </el-form-item>
+                    </el-form>
+                    <i class="el-icon-close" @click="removeWorkExperience(index)"></i>
+                </div>
+                <div style="position: relative;">
+                    <el-button type="primary" icon="el-icon-plus" @click="addWorkExperience" style="position: absolute;top:0;right:0;"></el-button>
+                </div>
+            </li>
+            <li :class="{avctive:currentTap === 2}">
+                <h2>学习经历</h2>
+            </li>
+            <li :class="{avctive:currentTap === 3}">
+                <h2>项目经历</h2>
+            </li>
+            <li :class="{avctive:currentTap === 4}">
+                <h2>获奖情况</h2>
+            </li>
+            <li :class="{avctive:currentTap === 5}">
+                <h2>联系方式</h2>
+            </li>
         </ol>
     </div>
 </template>
 
 <script>
+    import profileEditor from './profileEditor.vue'
     export default {
+        components: {profileEditor},
         data() {
             return {
                 currentTap: 0,
-                icons: ['identity', 'experience', 'book', 'project', 'prize', 'phone']
+                icons: ['identity', 'experience', 'book', 'project', 'prize', 'phone'],
+                profile: {
+                    name: '',
+                    city: '',
+                    birth: ''
+                },
+                workExperience: [
+                    { company: '', content: '' }
+                ]
             }
+        },
+        methods: {
+            addWorkExperience() {
+                this.workExperience.push({
+                    company: '', content: ''
+                })
+            },
+            removeWorkExperience(index) {
+                this.workExperience.splice(index, 1)
+            }
+        },
+        created() {
         }
     }
 </script>
@@ -38,7 +87,6 @@
         >nav {
             background: #000;
             width: 80px;
-
             >ol>li {
                 padding: 16px 0;
                 text-align: center;
@@ -56,8 +104,21 @@
             }
         }
         >.panes {
+            flex: 1;
+
             >li {
                 display: none;
+                padding: 32px;
+                height: 100%;
+                overflow: auto;
+                .wrap {
+                    position: relative;
+                    >.el-icon-close {
+                        position: absolute;
+                        right: 0;
+                        top: 0;
+                    }
+                }
                 &.avctive {
                     display: block;
                 }
