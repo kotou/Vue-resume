@@ -12,22 +12,36 @@
         <ol class="panes">
             <!--<li v-for="i in [0,1,2,3,4,5]" :class="{avctive:currentTap === i}">tab{{i+1}}</li>-->
             <li :class="{avctive:currentTap === 0}">
-                <profileEditor :profile="profile"></profileEditor>
+                <profileEditor :profile="resume.profile"></profileEditor>
             </li>
             <li :class="{avctive:currentTap === 1}">
-                <workEditor :workExperience="workExperience"></workEditor>
+                <ArrayEditor :items="resume.studyExperience" :labels="{school:'学校',duration:'时间',degree:'学位'}" title="学习经历"></ArrayEditor>
             </li>
             <li :class="{avctive:currentTap === 2}">
-                <h2>学习经历</h2>
+                <ArrayEditor :items="resume.workExperience" :labels="{company:'公司',content:'工作内容'}" title="工作经历"></ArrayEditor>
             </li>
             <li :class="{avctive:currentTap === 3}">
-                <h2>项目经历</h2>
+                <ArrayEditor :items="resume.projects" :labels="{name: '项目名称', content:'项目内容'}" title="项目经验"></ArrayEditor>
             </li>
             <li :class="{avctive:currentTap === 4}">
-                <h2>获奖情况</h2>
+                <ArrayEditor :items="resume.awards" :labels="{name: '奖项名称'}" title="获奖情况"></ArrayEditor>
             </li>
             <li :class="{avctive:currentTap === 5}">
                 <h2>联系方式</h2>
+                <el-form>
+                    <el-form-item label="QQ">
+                        <el-input v-model="resume.contacts.qq"></el-input>
+                    </el-form-item>
+                    <el-form-item label="微信">
+                        <el-input v-model="resume.contacts.wechat"></el-input>
+                    </el-form-item>
+                    <el-form-item label="邮箱">
+                        <el-input v-model="resume.contacts.email"></el-input>
+                    </el-form-item>
+                    <el-form-item label="手机">
+                        <el-input v-model="resume.contacts.phone"></el-input>
+                    </el-form-item>
+                </el-form>
             </li>
         </ol>
     </div>
@@ -35,26 +49,15 @@
 
 <script>
     import profileEditor from './profileEditor.vue'
-    import workEditor from './workEditor.vue'
+    import ArrayEditor from './ArrayEditor.vue'
     export default {
-        components: { profileEditor, workEditor},
+        components: { profileEditor, ArrayEditor },
+        props: ['resume'],
         data() {
             return {
                 currentTap: 0,
-                icons: ['identity', 'experience', 'book', 'project', 'prize', 'phone'],
-                profile: {
-                    name: '',
-                    city: '',
-                    birth: ''
-                },
-                workExperience: [
-                    { company: '', content: '' }
-                ]
+                icons: ['identity', 'book', 'experience', 'project', 'prize', 'phone']
             }
-        },
-        methods: {
-        },
-        created() {
         }
     }
 </script>

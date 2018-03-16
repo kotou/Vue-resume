@@ -4,8 +4,10 @@
             个人简历
         </div>
         <div class="actions">
+            <el-button type="primary">注册</el-button>
+            <el-button>登录</el-button>
             <el-button type="primary">保存</el-button>
-            <el-button>预览</el-button>
+            <el-button @click="preview">预览</el-button>
         </div>
     </div>
 </template>
@@ -24,3 +26,13 @@
         }
     }
 </style>
+
+<script>
+    export default {
+        methods: {
+            preview() {
+                this.$emit('preview')
+            }
+        }
+    }
+</script>
